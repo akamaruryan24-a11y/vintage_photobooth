@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Booth - Classic WebRTC Photobooth</title>
+    <!-- Google Fonts: Playfair Display for headings & Special Elite for typewriter style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Elite&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Overlay Grain / Noise Efek Vintage -->
+    <div class="grain-overlay"></div>
+
+    <div class="app-container">
+        <!-- ================= WELCOME SCREEN ================= -->
+        <section id="welcome-screen" class="screen active">
+            <div class="vintage-card welcome-card">
+                <div class="vintage-border-double">
+                    <div class="vintage-ornament top">✦ ❖ ✦</div>
+                    <h1 class="vintage-title">Vintage<br><span class="subtitle-vintage">BOOTH</span></h1>
+                    <p class="vintage-description">
+                        Abadikan momen berhargamu dalam secarik kertas memori dengan sentuhan retro klasik langsung dari kameramu.
+                    </p>
+                    <div class="vintage-ornament bottom">✦ ❖ ✦</div>
+                    
+                    <button id="btn-to-filter" class="btn btn-vintage btn-large">
+                        MULAI SESI
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BOOTH / CAMERA & FILTER SCREEN ================= -->
+        <section id="booth-screen" class="screen">
+            <div class="booth-layout">
+                <!-- Sisi Kiri / Atas: Area Kamera -->
+                <div class="camera-container">
+                    <div class="camera-frame polaroid-frame">
+                        <!-- Indikator Hitung Mundur / Status -->
+                        <div id="status-badge" class="status-badge hidden">Foto 1 / 3</div>
+                        
+                        <div class="video-wrapper">
+                            <video id="webcam" autoplay playsinline muted></video>
+                            
+                            <!-- Flash Overlay Effect -->
+                            <div id="flash-overlay" class="flash-overlay"></div>
+                            
+                            <!-- Large Countdown Text -->
+                            <div id="countdown-display" class="countdown-display hidden">3</div>
+                        </div>
+                        
+                        <div class="polaroid-footer">
+                            <div class="polaroid-brand">Vintage Booth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sisi Kanan / Bawah: Panel Kontrol & Filter -->
+                <div class="controls-panel">
+                    <h2 class="panel-title">Pilih Filter</h2>
+                    <p class="panel-subtitle">Gunakan nuansa warna masa lalu yang kamu sukai</p>
+                    
+                    <!-- Filter Cards Grid -->
+                    <div class="filters-grid">
+                        <div class="filter-option active" data-filter="normal">
+                            <div class="filter-preview filter-normal"></div>
+                            <span class="filter-name">Normal</span>
+                        </div>
+                        <div class="filter-option" data-filter="sepia">
+                            <div class="filter-preview filter-sepia"></div>
+                            <span class="filter-name">Classic Sepia</span>
+                        </div>
+                        <div class="filter-option" data-filter="grayscale">
+                            <div class="filter-preview filter-grayscale"></div>
+                            <span class="filter-name">Noir B&W</span>
+                        </div>
+                        <div class="filter-option" data-filter="warm">
+                            <div class="filter-preview filter-warm"></div>
+                            <span class="filter-name">Warm Retro</span>
+                        </div>
+                        <div class="filter-option" data-filter="cyanotype">
+                            <div class="filter-preview filter-cyanotype"></div>
+                            <span class="filter-name">Cyanotype</span>
+                        </div>
+                        <div class="filter-option" data-filter="faded">
+                            <div class="filter-preview filter-faded"></div>
+                            <span class="filter-name">Faded Film</span>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Mulai Potret (Aktif setelah filter dipilih) -->
+                    <div class="action-footer">
+                        <button id="btn-start-capture" class="btn btn-vintage btn-capture">
+                            MULAI FOTO
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RESULT / PHOTOSTRIP SCREEN ================= -->
+        <section id="result-screen" class="screen">
+            <div class="result-layout">
+                <h2 class="result-title">Kertas Memorimu</h2>
+                <p class="result-subtitle">Sekali tertangkap, selamanya terkenang.</p>
+                
+                <!-- Container Tampilan Hasil Photostrip -->
+                <div class="photostrip-display-container">
+                    <div class="photostrip-frame">
+                        <img id="photostrip-img" alt="Hasil Photostrip Vintage" />
+                    </div>
+                </div>
+
+                <!-- Kontrol Hasil -->
+                <div class="result-actions">
+                    <button id="btn-download" class="btn btn-vintage">
+                        UNDUH PHOTOSTRIP
+                    </button>
+                    <button id="btn-restart" class="btn btn-vintage-outline">
+                        FOTO LAGI
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Canvas Tersembunyi Untuk Memproses/Menggabungkan Gambar -->
+    <canvas id="photo-canvas" style="display: none;"></canvas>
+    
+    <!-- File JavaScript Utama -->
+    <script src="app.js"></script>
+</body>
+</html>
